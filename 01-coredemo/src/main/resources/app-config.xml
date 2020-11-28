@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--    Constructor based DI: -->
+<!--    <bean id="provider" class="coredemo.provider.MockArticleProvider" />-->
+<!--    <bean id="consumer" class="coredemo.consumer.ConsoleArticleConsumer" c:articleProvider-ref="provider"/>-->
+
+<!--    Static factory method DI:-->
+     <bean id="provider" class="coredemo.provider.MockArticleProvider" factory-method="createProvider" />
+
+<!--    Instance factory method-based DI:-->
+<!--    <bean id="consumerFactory" class="coredemo.consumer.ConsumerFactory" c:provider-ref="provider" />-->
+<!--    <bean id="consumer" class="coredemo.consumer.ConsoleArticleConsumer" factory-bean="consumerFactory" factory-method="createConsumer" />-->
+
+<!--    Property-based DI:-->
+<!--    for GenericApplicationContextDemo-->
+    <bean id="consumer" class="coredemo.consumer.ConsoleArticleConsumer"
+          p:articleProvider-ref="provider" p:articleFormatter-ref="formatter"/>
+
+<!--    for XmlAppContextDemo -->
+<!--    <bean id="consumer" class="coredemo.consumer.ConsoleArticleConsumer"-->
+<!--          p:articleProvider-ref="provider"/>-->
+
+</beans>
