@@ -6,6 +6,7 @@ import coredemo.consumer.ConsoleArticleConsumer;
 import coredemo.formatter.ArticleFormatter;
 import coredemo.formatter.DefaultArticleFormatter;
 import coredemo.provider.ArticleProvider;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -22,9 +23,11 @@ public class AppConfig {
     }
 
     @Bean("consumer")
-    public ArticleConsumer createConsumer(ArticleProvider provider, ArticleFormatter formatter, @Value("${message}") String message) { // proxy
+    public ArticleConsumer createConsumer(@Qualifier("altProvider") ArticleProvider prov, // w/ @Qualifier the name counts => provider / alternative (@Repostiory("..."))
+                                          ArticleFormatter formatter,
+                                          @Value("${message}") String message) { // proxy
         ConsoleArticleConsumer consumer = new ConsoleArticleConsumer();
-        consumer.setArticleProvider(provider);
+        consumer.setArticleProvider(prov);
         consumer.setArticleFormatter(formatter);
         consumer.setMessage(message);
         return consumer;
