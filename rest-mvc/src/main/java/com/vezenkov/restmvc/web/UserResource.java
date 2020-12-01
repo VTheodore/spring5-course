@@ -11,7 +11,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.util.List;
 
 
-@RestController("/api/users")
+@RestController
+@RequestMapping("/api/users")
 public class UserResource {
     private final UserService userService;
 
