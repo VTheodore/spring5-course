@@ -7,13 +7,13 @@ import java.util.List;
 public interface PostRepository {
     List<Post> findAll();
 
-    Post findById(Long id);
+    Post findById(String id);
 
     Post createPost(Post post);
 
     Post updatePost(Post post);
 
-    Post deleteById(Long id);
+    Post deleteById(String id);
 
     long count();
 }

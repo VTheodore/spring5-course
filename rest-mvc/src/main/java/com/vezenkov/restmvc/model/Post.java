@@ -1,17 +1,17 @@
 package com.vezenkov.restmvc.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
+@AllArgsConstructor
 public class Post {
-    private Long id;
+    private String id;
 
     @NonNull
     private String title;
@@ -21,6 +21,10 @@ public class Post {
 
     @NonNull
     private String author;
+
+    private String imageUrl;
+
+    private List<String> keywords = new ArrayList<>();
 
     private LocalDateTime created = LocalDateTime.now();
 

@@ -13,7 +13,7 @@ import java.util.concurrent.atomic.AtomicLong;
 @Repository
 public class PostRepositoryMock implements PostRepository {
     private final AtomicLong nextId = new AtomicLong(0L);
-    private final Map<Long, Post> posts = new ConcurrentHashMap<>();
+    private final Map<String, Post> posts = new ConcurrentHashMap<>();
 
     public PostRepositoryMock() {
         Arrays.stream(new Post[] {
@@ -29,29 +29,32 @@ public class PostRepositoryMock implements PostRepository {
     }
 
     @Override
-    public Post findById(Long id) {
+    public Post findById(String id) {
         return this.posts.get(id);
     }
 
     @Override
     public Post createPost(Post post) {
-        post.setId(this.nextId.incrementAndGet());
-
-        return this.posts.put(post.getId(), post);
+        post.setId(String.format("%024d", this.nextId.incrementAndGet()));
+        this.posts.put(post.getId(), post);
+        return post;
     }
 
     @Override
     public Post updatePost(Post post) {
-        return null;
+        Post old = this.posts.replace(post.getId(), post);
+
+        if (old == null) return null;
+        return post;
     }
 
     @Override
-    public Post deleteById(Long id) {
-        return null;
+    public Post deleteById(String id) {
+        return this.posts.remove(id);
     }
 
     @Override
     public long count() {
-        return 0;
+        return posts.size();
     }
 }
