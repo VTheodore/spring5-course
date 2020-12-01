@@ -5,11 +5,15 @@ import com.vezenkov.restmvc.model.Post;
 import com.vezenkov.restmvc.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Set;
+
+import static com.vezenkov.restmvc.util.ErrorHandlingUtil.*;
 
 @RestController
 @RequestMapping("/api/posts")
@@ -38,7 +42,11 @@ public class PostResource {
     }
 
     @PostMapping
-    public ResponseEntity<Post> createPost(@RequestBody Post post) {
+    public ResponseEntity<Post> createPost(@Valid @RequestBody Post post, Errors errors) {
+        if (errors.hasErrors()) {
+            throw new InvalidEntityDataException("Invalid post data", getViolationsAsStringList(errors));
+        }
+
         Post created = this.postService.addPost(post);
 
         return ResponseEntity.created(
@@ -51,7 +59,11 @@ public class PostResource {
     }
 
     @PutMapping("/{id}")
-    public Post updatePost(@PathVariable("id") String id, @RequestBody Post post) {
+    public Post updatePost(@PathVariable("id") String id, @Valid @RequestBody Post post, Errors errors) {
+        if (errors.hasErrors()) {
+            throw new InvalidEntityDataException("Invalid post data", getViolationsAsStringList(errors));
+        }
+
         if (!id.equals(post.getId())) {
             throw new InvalidEntityDataException(String.format("Post URL ID:%s differs from body entity ID:%s", id, post.getId()));
         }
