@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Repository
-public class MockArticleProvider implements ArticleProvider{
+public class MockArticleProvider implements ArticleProvider {
     @Override
     public List<Article> getArticles() {
         return Arrays.asList(

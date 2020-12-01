@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-public class ConsoleArticleConsumer implements ArticleConsumer{
-//    @Autowired
+public class ConsoleArticleConsumer implements ArticleConsumer {
+    //    @Autowired
     private ArticleProvider articleProvider;
     private ArticleFormatter articleFormatter;
 
@@ -17,7 +17,7 @@ public class ConsoleArticleConsumer implements ArticleConsumer{
     public ConsoleArticleConsumer() {
     }
 
-//    @Autowired
+    //    @Autowired
     public ConsoleArticleConsumer(ArticleProvider articleProvider) {
         this.articleProvider = articleProvider;
     }
@@ -29,16 +29,16 @@ public class ConsoleArticleConsumer implements ArticleConsumer{
 
     //    @Autowired
     public void setArticleProvider(ArticleProvider articleProvider) {
-        articleProvider.addArticle(new Article("Added article from setter","hehe"));
+        articleProvider.addArticle(new Article("Added article from setter", "hehe"));
         this.articleProvider = articleProvider;
     }
 
-//    @Autowired
+    //    @Autowired
     public void updateProviderAndMessage(ArticleProvider articleProvider, @Value("${message}") String message, ArticleFormatter articleFormatter) {
-        articleProvider.addArticle(new Article("Added article from a method","hehe2"));
+        articleProvider.addArticle(new Article("Added article from a method", "hehe2"));
         this.articleProvider = articleProvider;
         this.message = message;
-        this.articleFormatter =  articleFormatter;
+        this.articleFormatter = articleFormatter;
     }
 
     public void setArticleFormatter(ArticleFormatter articleFormatter) {

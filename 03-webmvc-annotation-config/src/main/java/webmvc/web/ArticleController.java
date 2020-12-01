@@ -35,6 +35,7 @@ public class ArticleController {
     public String getIndex() {
         return "redirect:articles";
     }
+
     @GetMapping("/articles")
     public String getArticles(@RequestParam(value = "name", required = false) String name, Model model) {
         model.addAttribute("name", name);

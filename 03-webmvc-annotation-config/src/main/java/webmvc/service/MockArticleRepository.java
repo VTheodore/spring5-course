@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 public class MockArticleRepository implements ArticleRepository, InitializingBean {
-    private  List<Article> articles;
+    private List<Article> articles;
 
 
     @Override

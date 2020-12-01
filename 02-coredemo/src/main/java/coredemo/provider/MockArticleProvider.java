@@ -21,7 +21,7 @@ import java.util.stream.IntStream;
 // @Primary -> alternative to qualifier
 @Repository("provider")
 @Qualifier("mockProvider")
-public class MockArticleProvider implements ArticleProvider{
+public class MockArticleProvider implements ArticleProvider {
     private final AtomicInteger nextId = new AtomicInteger(0);
     private final Map<Integer, Article> articles = new ConcurrentHashMap<>();
 
