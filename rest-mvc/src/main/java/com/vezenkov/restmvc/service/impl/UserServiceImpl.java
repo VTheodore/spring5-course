@@ -5,6 +5,8 @@ import com.vezenkov.restmvc.exception.NonExistingEntityException;
 import com.vezenkov.restmvc.model.User;
 import com.vezenkov.restmvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -39,6 +41,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public User createUser(User user) {
         user.setId(null);
+        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        user.setPassword(encoder.encode(user.getPassword()));
         return this.userRepository.insert(user);
     }
 
