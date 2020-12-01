@@ -11,11 +11,11 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Repository
-public class PostRepositoryMock implements PostRepository {
+public class PostRepositoryOldMock implements PostRepositoryOld {
     private final AtomicLong nextId = new AtomicLong(0L);
     private final Map<String, Post> posts = new ConcurrentHashMap<>();
 
-    public PostRepositoryMock() {
+    public PostRepositoryOldMock() {
         Arrays.stream(new Post[] {
                 new Post("New Spring 5", "WebFlux is here ...", "Trayan Iliev"),
                 new Post("DI Basics", "There are many ways to DI in Spring ...", "Trayan Iliev"),

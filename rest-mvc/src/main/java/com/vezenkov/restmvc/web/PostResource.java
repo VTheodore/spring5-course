@@ -1,13 +1,13 @@
 package com.vezenkov.restmvc.web;
 
 import com.vezenkov.restmvc.dao.PostRepository;
+import com.vezenkov.restmvc.dao.PostRepositoryOld;
+import com.vezenkov.restmvc.exception.NonExistingEntityException;
 import com.vezenkov.restmvc.model.Post;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -29,12 +29,13 @@ public class PostResource {
 
     @GetMapping("/{id}")
     public Post getPostById(@PathVariable("id") String id) {
-        return this.repository.findById(id);
+        return this.repository.findById(id)
+                .orElseThrow(() -> new NonExistingEntityException(String.format("Post with ID:%s does not exits", id)));
     }
 
     @PostMapping
     public ResponseEntity<Post> createPost(@RequestBody Post post) {
-        Post created = this.repository.createPost(post);
+        Post created = this.repository.insert(post);
 
         return ResponseEntity.created(
                 ServletUriComponentsBuilder
@@ -47,11 +48,13 @@ public class PostResource {
 
     @PutMapping("/{id}")
     public Post updatePost(@PathVariable("id") String id, @RequestBody Post post) {
-        return this.repository.updatePost(post);
+        return this.repository.save(post);
     }
 
     @DeleteMapping("/{id}")
     public Post deletePost(@PathVariable("id") String id) {
-        return this.repository.deleteById(id);
+        Post removed = this.getPostById(id);
+        this.repository.delete(removed);
+        return removed;
     }
 }
