@@ -53,7 +53,7 @@ public class PostResource {
     @PutMapping("/{id}")
     public Post updatePost(@PathVariable("id") String id, @RequestBody Post post) {
         if (!id.equals(post.getId())) {
-            throw new InvalidEntityDataException(String.format("URL ID:%s differs from body entity ID:%s", id, post.getId()));
+            throw new InvalidEntityDataException(String.format("Post URL ID:%s differs from body entity ID:%s", id, post.getId()));
         }
 
         return this.postService.updatePost(post);
