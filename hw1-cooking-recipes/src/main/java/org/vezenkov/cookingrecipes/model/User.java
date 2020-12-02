@@ -87,6 +87,7 @@ public class User implements UserDetails {
         this.description = description;
     }
 
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles.stream()
