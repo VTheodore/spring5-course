@@ -23,13 +23,13 @@ import java.io.IOException;
 @Component
 @Slf4j
 @Order
-public class JwtRequestFilter extends OncePerRequestFilter {
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final UserService userService;
 
     private final JwtUtils jwtUtils;
 
     @Autowired
-    public JwtRequestFilter(UserService userService, JwtUtils jwtUtils) {
+    public JwtAuthenticationFilter(UserService userService, JwtUtils jwtUtils) {
         this.userService = userService;
         this.jwtUtils = jwtUtils;
     }

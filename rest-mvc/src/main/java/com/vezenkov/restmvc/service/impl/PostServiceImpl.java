@@ -4,7 +4,9 @@ import com.vezenkov.restmvc.dao.PostRepository;
 import com.vezenkov.restmvc.exception.NonExistingEntityException;
 import com.vezenkov.restmvc.model.Post;
 import com.vezenkov.restmvc.service.PostService;
+import com.vezenkov.restmvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -15,9 +17,12 @@ import java.util.Set;
 public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
 
+    private final UserService userService;
+
     @Autowired
-    public PostServiceImpl(PostRepository postRepository) {
+    public PostServiceImpl(PostRepository postRepository, UserService userService) {
         this.postRepository = postRepository;
+        this.userService = userService;
     }
 
     @Override
@@ -39,6 +44,8 @@ public class PostServiceImpl implements PostService {
     @Override
     public Post addPost(Post post) {
         post.setId(null);
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        post.setAuthorId(this.userService.getUserByUsername(username).getId());
         return this.postRepository.insert(post);
     }
 

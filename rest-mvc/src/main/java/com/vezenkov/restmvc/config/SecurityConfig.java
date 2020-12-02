@@ -1,8 +1,9 @@
 package com.vezenkov.restmvc.config;
 
 import com.vezenkov.restmvc.service.UserService;
+import com.vezenkov.restmvc.web.FilterChainExceptionHandlerFilter;
 import com.vezenkov.restmvc.web.JwtAuthenticationEntryPoint;
-import com.vezenkov.restmvc.web.JwtRequestFilter;
+import com.vezenkov.restmvc.web.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.LogoutFilter;
 
 import static com.vezenkov.restmvc.model.Role.*;
 import static org.springframework.http.HttpMethod.*;
@@ -20,12 +22,15 @@ import static org.springframework.http.HttpMethod.*;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
-    private final JwtRequestFilter jwtRequestFilter;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    private final FilterChainExceptionHandlerFilter filterChainExceptionHandlerFilter;
 
     @Autowired
-    public SecurityConfig(JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint, JwtRequestFilter jwtRequestFilter) {
+    public SecurityConfig(JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint, JwtAuthenticationFilter jwtAuthenticationFilter, FilterChainExceptionHandlerFilter filterChainExceptionHandlerFilter) {
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
-        this.jwtRequestFilter = jwtRequestFilter;
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+        this.filterChainExceptionHandlerFilter = filterChainExceptionHandlerFilter;
     }
 
     @Override
@@ -36,13 +41,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(GET,"/api/posts/**").permitAll()
                 .antMatchers(POST, "/api/posts").hasAnyRole(AUTHOR.toString(), ADMIN.toString())
                 .antMatchers(PUT, "/api/posts").hasAnyRole(AUTHOR.toString(), ADMIN.toString())
-                .antMatchers(DELETE, "/api/posts").hasAnyRole(AUTHOR.toString(), ADMIN.toString())
+                .antMatchers(DELETE, "/api/posts/**").hasAnyRole(AUTHOR.toString(), ADMIN.toString())
                 .antMatchers("/api/users/**").hasRole(ADMIN.toString())
                 .antMatchers("/**").permitAll()
                 .and().exceptionHandling().authenticationEntryPoint(this.jwtAuthenticationEntryPoint)
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        http.addFilterBefore(this.jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(this.jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(this.filterChainExceptionHandlerFilter, LogoutFilter.class);
     }
 
     @Bean

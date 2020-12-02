@@ -1,9 +1,10 @@
 package com.vezenkov.restmvc.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -18,8 +19,9 @@ public class ErrorResponse {
     private String message;
     
     private List<String> violations = new ArrayList<>();
-    
-    private LocalDateTime timestamp = LocalDateTime.now();
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
+    private Date timestamp;
 
     public ErrorResponse(@NonNull int code, @NonNull String message, List<String> violations) {
         this.code = code;
