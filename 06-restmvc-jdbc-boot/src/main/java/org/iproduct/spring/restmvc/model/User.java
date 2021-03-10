@@ -27,7 +27,7 @@ import static com.fasterxml.jackson.annotation.JsonProperty.Access.WRITE_ONLY;
 @Data
 @Builder
 public class User implements UserDetails {
-//    @Id
+    //    @Id
     private long id;
 
     @NotNull
@@ -104,7 +104,7 @@ public class User implements UserDetails {
         return password;
     }
 
-    @JsonProperty(access=WRITE_ONLY)
+    @JsonProperty(access = WRITE_ONLY)
     public void setPassword(String password) {
         this.password = password;
     }

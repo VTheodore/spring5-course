@@ -45,7 +45,7 @@ public class UserResource {
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable("id") String id, @RequestBody  User user) {
+    public User updateUser(@PathVariable("id") String id, @RequestBody User user) {
         if (!id.equals(user.getId())) {
             throw new InvalidEntityDataException(String.format("User URL ID:%s differs from body entity ID:%s", id, user.getId()));
         }

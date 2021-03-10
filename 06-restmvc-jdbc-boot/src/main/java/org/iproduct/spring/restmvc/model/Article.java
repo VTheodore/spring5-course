@@ -12,20 +12,20 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class Article {
-//    @Id
+    //    @Id
     private long id;
 
     @NonNull
-    @Length(min=3, max=80)
+    @Length(min = 3, max = 80)
     private String title;
 
     @NonNull
-    @Length(min=3, max=2048)
+    @Length(min = 3, max = 2048)
     private String content;
 
     private long authorId;
 
-    @Length(min=3, max=256)
+    @Length(min = 3, max = 256)
     private String pictureUrl;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "uuuu-MM-dd HH:mm:ss")

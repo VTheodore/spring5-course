@@ -2,7 +2,7 @@ package com.vezenkov.restmvc.exception;
 
 import java.util.List;
 
-public class InvalidEntityDataException extends RuntimeException{
+public class InvalidEntityDataException extends RuntimeException {
     private List<String> violations;
 
     public InvalidEntityDataException() {

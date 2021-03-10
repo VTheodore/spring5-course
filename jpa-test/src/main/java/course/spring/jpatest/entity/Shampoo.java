@@ -15,7 +15,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class Shampoo extends BaseEntity{
+public class Shampoo extends BaseEntity {
 
     @NonNull
     @NotNull

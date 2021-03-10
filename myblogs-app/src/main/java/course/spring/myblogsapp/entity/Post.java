@@ -45,7 +45,7 @@ public class Post {
 
     @NonNull
     @ElementCollection
-    private Set< @Size(min = 2, max = 30) String> keyWords;
+    private Set<@Size(min = 2, max = 30) String> keyWords;
 
     @NotNull
     @PastOrPresent

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head::head('Projects List')"></head>
+
+<body>
+<div th:replace="fragments/menu::menu(${path})"></div>
+
+<div class="container">
+    <h3>Welcome to All Recipes</h3>
+
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Brief Description</th>
+            <th scope="col">Time to cook</th>
+            <th scope="col">Author</th>
+        </tr>
+        </thead>
+
+        <tr th:each="row, rowStat : ${recipes}">
+            td th:text="${rowStat.index + 1}"></td>
+            <td th:text="${row.recipeName}"></td>
+            <td th:text="${row.briefDescription}"></td>
+            <td th:text="${row.timeToCook}"></td>
+            <td th:text="${row.author.name}"></td>
+        </tr>
+    </table>
+</div>
+
+<div th:replace="fragments/foot::foot"></div>
+</body>
+
+</html>

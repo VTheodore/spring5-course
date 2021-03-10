@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head::head('Add Recipe')"></head>
+
+<body>
+<div th:replace="fragments/menu::menu(${path})"></div>
+
+<div class="container">
+    <h3 th:text="${title}"></h3>
+    <form th:object="${recipe}" method="post" class="form-horizontal col-md-9 col-lg-6" enctype="multipart/form-data">
+        <div th:if="${recipe.id != null}" class="form-group row">
+            <label path="id" class="col-sm-2 col-form-label">ID</label>
+            <div class="col-sm-10">
+                <input type="text" th:value="${recipe.id}" id="id" name="id" class="form-control" title="Recipe Id"
+                       readonly>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label path="recipeName" class="col-sm-2 col-form-label">Recipe Title</label>
+            <div class="col-sm-10">
+                <input type="text" th:value="${recipe.recipeName}" id="recipeName" name="recipeName"
+                       class="form-control" title="Add Title" th:errorclass="field-error">
+            </div>
+        </div>
+
+        <p th:if="${#fields.hasErrors('recipeName')}" th:errors="${recipe.recipeName}"
+           class="errors alert alert-danger offset-sm-2 col-sm-10">
+            Recipe name should be between 3 and 256 characters.
+        </p>
+
+        <div class="form-group row">
+            <label path="briefDescription" class="col-sm-2 col-form-label">Brief Description</label>
+            <div class="col-sm-10">
+                <textarea th:value="${recipe.briefDescription}" id="briefDescription" name="briefDescription" rows="4"
+                          cols="50" class="form-control" title="Add Brief Description"
+                          th:errorclass="field-error"></textarea>
+            </div>
+        </div>
+
+        <p th:if="${#fields.hasErrors('briefDescription')}" th:errors="${recipe.briefDescription}"
+           class="errors alert alert-danger offset-sm-2 col-sm-10">
+            Brief description should be between 3 and 256 characters.
+        </p>
+
+        <div class="form-group row">
+            <label path="fullDescription" class="col-sm-2 col-form-label">Full Description</label>
+            <div class="col-sm-10">
+                <textarea th:value="${recipe.fullDescription}" id="fullDescription" name="fullDescription" rows="6"
+                          cols="50" class="form-control" title="Add Brief Description"
+                          th:errorclass="field-error"></textarea>
+            </div>
+        </div>
+
+        <p th:if="${#fields.hasErrors('fullDescription')}" th:errors="${recipe.fullDescription}"
+           class="errors alert alert-danger offset-sm-2 col-sm-10">
+            Full description should be no more than 2048 characters.
+        </p>
+
+        <div class="form-group row">
+            <label path="timeToCook" class="col-sm-2 col-form-label">Time to Cook</label>
+            <div class="col-sm-10">
+                <input type="number" th:value="${recipe.timeToCook}" id="timeToCook" name="timeToCook"
+                       class="form-control" title="Add Brief Description" th:errorclass="field-error">
+            </div>
+        </div>
+
+        <p th:if="${#fields.hasErrors('timeToCook')}" th:errors="${recipe.timeToCook}"
+           class="errors alert alert-danger offset-sm-2 col-sm-10">
+            Must be a positive number.
+        </p>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Picture</label>
+            <div class="col-sm-10">
+                <div class="custom-file">
+                    <input type="file" id="file" name="file" class="custom-file-input" th:value="*{pictureUrl}">
+                    <label th:text="${#strings.isEmpty(recipe.pictureUrl)}? 'Choose File' : *{pictureUrl}"
+                           class="custom-file-label" for="file">Choose picture file</label>
+                </div>
+            </div>
+        </div>
+
+        <p th:if="${fileError != null}" class="errors alert alert-danger offset-sm-2 col-sm-10">
+            <span th:text="${fileError}"></span>
+        </p>
+
+        <div class="form-group row">
+            <div class="offset-sm-2 col-sm-10">
+                <button type="submit" class="btn btn-primary" id="submit" name="submit" value="submit">Submit</button>
+                <button type="reset" class="btn btn-danger">Reset</button>
+                <a th:href="${'/recipes'}" class="btn btn-secondary" id="cancel">Cancel</a>
+            </div>
+        </div>
+    </form>
+
+    <div th:replace="fragments/foot :: foot"></div>
+    </form>
+</div>
+
+</body>

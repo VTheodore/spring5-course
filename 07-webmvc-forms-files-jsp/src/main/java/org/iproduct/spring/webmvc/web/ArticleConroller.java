@@ -62,7 +62,7 @@ public class ArticleConroller {
 
     @RequestMapping(value = "/articles", method = RequestMethod.GET)
     public String getArticles(
-            @RequestParam(name="name", required = false, defaultValue = "Stranger") String name,
+            @RequestParam(name = "name", required = false, defaultValue = "Stranger") String name,
             Model model) {
         model.addAttribute("name", name);
         model.addAttribute("articles", repository.findAll());
@@ -88,7 +88,7 @@ public class ArticleConroller {
             return "articleForm";
         }
 
-        if(!file.isEmpty() && file.getOriginalFilename().length() > 0) {
+        if (!file.isEmpty() && file.getOriginalFilename().length() > 0) {
             handleMultipartFile(file);
             article.setPictureUrl(file.getOriginalFilename());
         }
@@ -100,11 +100,11 @@ public class ArticleConroller {
     public String addArticle(@ModelAttribute("selection") ArticlesSelection selection,
                              BindingResult result, ModelMap model,
                              SessionStatus session,
-                             @RequestParam(value="clear", required = false) String clear) {
+                             @RequestParam(value = "clear", required = false) String clear) {
         if (result.hasErrors()) {
             return "articles";
         }
-        if(clear != null) {
+        if (clear != null) {
             session.setComplete();
             selection.setArticleIds(new ArrayList<>());
         }
@@ -116,7 +116,7 @@ public class ArticleConroller {
     @RequestMapping(value = "/uploadFiles", method = RequestMethod.POST)
     public String submit(@RequestParam("files") MultipartFile[] files, ModelMap modelMap) {
         modelMap.addAttribute("files", files);
-        for(MultipartFile file: files) {
+        for (MultipartFile file : files) {
             handleMultipartFile(file);
         }
         return "fileUploadView";
@@ -128,7 +128,7 @@ public class ArticleConroller {
         System.out.println("File: " + name + ", Size: " + size);
         try {
             File currentDir = new File(UPLOADS_DIR);
-            if(!currentDir.exists()) {
+            if (!currentDir.exists()) {
                 currentDir.mkdirs();
             }
             String path = currentDir.getAbsolutePath() + "/" + file.getOriginalFilename();
@@ -141,10 +141,10 @@ public class ArticleConroller {
         }
     }
 
-    @ExceptionHandler ({CustomValidationException.class, FileSystemException.class})
+    @ExceptionHandler({CustomValidationException.class, FileSystemException.class})
     @Order(1)
     public ResponseEntity<String> handle(Exception ex) {
-        LOG.error("Article Controller Error:",ex);
+        LOG.error("Article Controller Error:", ex);
         return ResponseEntity.badRequest().body(ex.toString());
     }
 

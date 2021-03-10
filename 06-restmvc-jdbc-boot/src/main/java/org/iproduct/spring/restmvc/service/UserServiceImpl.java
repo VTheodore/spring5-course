@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
         });
         user.setCreated(LocalDateTime.now());
         user.setUpdated(LocalDateTime.now());
-        if(user.getRoles() == null) {
+        if (user.getRoles() == null) {
             user.setRoles("ROLE_USER");
         }
         PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
@@ -104,7 +104,7 @@ public class UserServiceImpl implements UserService {
         return repo.count();
     }
 
-//     Declarative transaction
+    //     Declarative transaction
     @Transactional
     public List<User> createUsersBatch(List<User> users) {
         List<User> created = users.stream()

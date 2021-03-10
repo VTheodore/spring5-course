@@ -18,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class Company extends BaseEntity{
+public class Company extends BaseEntity {
 
     @NonNull
     @NotNull

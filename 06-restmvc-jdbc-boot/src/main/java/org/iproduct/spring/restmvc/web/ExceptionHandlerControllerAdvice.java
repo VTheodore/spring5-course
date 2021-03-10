@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class ExceptionHandlerControllerAdvice {
 
     @ExceptionHandler
-    public ResponseEntity<String> handle(EntityNotFoundException ex){
+    public ResponseEntity<String> handle(EntityNotFoundException ex) {
         log.error(ex.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 
     @ExceptionHandler
-    public ResponseEntity<String> handle(InvalidEntityIdException ex){
+    public ResponseEntity<String> handle(InvalidEntityIdException ex) {
         log.error(ex.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }

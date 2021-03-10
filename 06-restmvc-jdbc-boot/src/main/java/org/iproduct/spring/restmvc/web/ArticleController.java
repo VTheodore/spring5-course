@@ -39,14 +39,14 @@ public class ArticleController {
     public ResponseEntity<Article> addArticle(@RequestBody Article article) {
         Article created = service.addArticle(article);
         URI location = MvcUriComponentsBuilder.fromMethodName(ArticleController.class, "addArticle", article)
-                .pathSegment("{id}").buildAndExpand(created.getId()).toUri() ;
+                .pathSegment("{id}").buildAndExpand(created.getId()).toUri();
         return ResponseEntity.created(location).body(created);
 //        return ResponseEntity.status(303).location(location).body(created);
     }
 
     @PutMapping("{id}")
     public ResponseEntity<Article> addArticle(@PathVariable long id, @RequestBody Article article) {
-        if(article.getId() != id) throw new InvalidEntityIdException(
+        if (article.getId() != id) throw new InvalidEntityIdException(
                 String.format("Article ID=%s from path is different from Entity ID=%s", id, article.getId()));
         Article updated = service.updateArticle(article);
         log.info("Article updated: {}", updated);

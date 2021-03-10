@@ -66,7 +66,7 @@ public class UserRepositoryImpl implements UserRepository {
                     "select * from users where username = :username", namedParameters, userMapper);
             log.info("User found: {}", user);
             return Optional.of(user);
-        } catch(IncorrectResultSizeDataAccessException ex) {
+        } catch (IncorrectResultSizeDataAccessException ex) {
             return Optional.empty();
         }
 
@@ -89,8 +89,8 @@ public class UserRepositoryImpl implements UserRepository {
         SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(user);
         int count = this.jdbcTemplate.update(
                 "update users set username = :username, password = :password, fname = :fname, lname = :lname, " +
-                    "roles = :roles, active = :active, created = :created, updated = :updated " +
-                    "where id = :id",
+                        "roles = :roles, active = :active, created = :created, updated = :updated " +
+                        "where id = :id",
                 namedParameters);
         log.info("User updated: {}", user);
         return user;

@@ -17,7 +17,7 @@ public class ErrorResponse {
 
     @NonNull
     private String message;
-    
+
     private List<String> violations = new ArrayList<>();
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")

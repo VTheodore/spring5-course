@@ -14,7 +14,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class Label extends BaseEntity{
+public class Label extends BaseEntity {
 
     @NonNull
     @NotNull

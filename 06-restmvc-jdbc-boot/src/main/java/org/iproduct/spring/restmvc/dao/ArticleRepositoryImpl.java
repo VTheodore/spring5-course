@@ -49,7 +49,7 @@ public class ArticleRepositoryImpl implements ArticleRepository {
                 .query("select * from articles", new ArticleMapper());
         log.info("Articles loaded: {}", articles.size());
         return articles;
-}
+    }
 
     @Override
     public Optional<Article> findById(long id) {
@@ -66,7 +66,7 @@ public class ArticleRepositoryImpl implements ArticleRepository {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(new PreparedStatementCreator() {
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                               PreparedStatement ps = connection.prepareStatement(INSERT_SQL, new String[] {"id"});
+                PreparedStatement ps = connection.prepareStatement(INSERT_SQL, new String[]{"id"});
                 ps.setString(1, article.getTitle());
                 ps.setString(2, article.getContent());
                 ps.setLong(3, article.getAuthorId());
@@ -87,14 +87,14 @@ public class ArticleRepositoryImpl implements ArticleRepository {
     @Transactional
     public Article save(Article article) {
         int count = this.jdbcTemplate.update(
-            "update articles set title = ?, content = ? , author_id = ?, picture_url = ?, created = ?, updated = ? where id = ?",
-            article.getTitle(),
-            article.getContent(),
-            article.getAuthorId(),
-            article.getPictureUrl(),
-            article.getCreated(),
-            article.getUpdated(),
-            article.getId());
+                "update articles set title = ?, content = ? , author_id = ?, picture_url = ?, created = ?, updated = ? where id = ?",
+                article.getTitle(),
+                article.getContent(),
+                article.getAuthorId(),
+                article.getPictureUrl(),
+                article.getCreated(),
+                article.getUpdated(),
+                article.getId());
         log.info("Article updated: {}", article);
         return article;
     }

@@ -43,7 +43,7 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         long countBefore = articleService.getArticlesCount();
-        if(countBefore == 0) {
+        if (countBefore == 0) {
             try {
                 List<Article> created = articleService.createArticlesBatch(mockArticles);
                 log.info(">>> Articles batch created: {}", created);
@@ -74,9 +74,9 @@ public class DataInitializer implements CommandLineRunner {
         log.info("Users count: {}", usersCount);
 
         if (usersCount == 0) {
-            List<User> users = Arrays.asList(new User[] {
-                new User("admin", "admin", "DEFAULT", "ADMIN", "ROLE_ADMIN"),
-                new User("ivan", "ivan", "Ivan", "Petrov", "ROLE_USER")
+            List<User> users = Arrays.asList(new User[]{
+                    new User("admin", "admin", "DEFAULT", "ADMIN", "ROLE_ADMIN"),
+                    new User("ivan", "ivan", "Ivan", "Petrov", "ROLE_USER")
             });
 
             users.stream().forEach(user -> userService.createUser(user));
@@ -90,7 +90,6 @@ public class DataInitializer implements CommandLineRunner {
                 .query("select * from users", new UserMapper())
                 .forEach(user -> log.info(user.toString()));
     }
-
 
 
 }

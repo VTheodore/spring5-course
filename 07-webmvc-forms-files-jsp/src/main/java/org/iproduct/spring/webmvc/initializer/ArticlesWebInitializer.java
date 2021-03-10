@@ -21,17 +21,17 @@ public class ArticlesWebInitializer extends
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class<?>[] { SpringRootConfig.class };
+        return new Class<?>[]{SpringRootConfig.class};
     }
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class<?>[] { SpringWebConfig.class };
+        return new Class<?>[]{SpringWebConfig.class};
     }
 
     @Override
     protected String[] getServletMappings() {
-        return new String[] { "/" };
+        return new String[]{"/"};
     }
 
     @Override
@@ -40,7 +40,7 @@ public class ArticlesWebInitializer extends
     }
 
     private MultipartConfigElement getMultipartConfigElement() {
-        MultipartConfigElement multipartConfigElement = new MultipartConfigElement( LOCATION, MAX_FILE_SIZE, MAX_REQUEST_SIZE, FILE_SIZE_THRESHOLD);
+        MultipartConfigElement multipartConfigElement = new MultipartConfigElement(LOCATION, MAX_FILE_SIZE, MAX_REQUEST_SIZE, FILE_SIZE_THRESHOLD);
         return multipartConfigElement;
     }
 

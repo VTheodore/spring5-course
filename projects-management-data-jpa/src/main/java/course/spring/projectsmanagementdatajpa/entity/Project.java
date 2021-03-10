@@ -17,7 +17,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class Project extends BaseEntity{
+public class Project extends BaseEntity {
 
     @NonNull
     @NotNull

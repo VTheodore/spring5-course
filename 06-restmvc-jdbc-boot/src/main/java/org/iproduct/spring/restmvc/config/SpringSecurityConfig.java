@@ -22,8 +22,8 @@ import static org.springframework.http.HttpMethod.*;
 @Slf4j
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
-        @Override
-        protected void configure (HttpSecurity http) throws Exception {
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers(POST, "/**").hasAnyRole("USER", "ADMIN")
@@ -58,4 +58,4 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 //        return manager;
 //    }
 
-    }
+}

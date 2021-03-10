@@ -143,7 +143,7 @@ public class ArticleServiceImpl implements ArticleService {
 //            });
 //    }
 
-   // Managing transaction directly using PlatformTransactionManager
+    // Managing transaction directly using PlatformTransactionManager
 //    public List<Article> createArticlesBatch(List<Article> articles) {
 //        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
 //        // explicitly setting the transaction name is something that can only be done programmatically

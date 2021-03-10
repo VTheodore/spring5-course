@@ -17,7 +17,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class Ingredient extends BaseEntity{
+public class Ingredient extends BaseEntity {
 
     @NonNull
     @NotNull

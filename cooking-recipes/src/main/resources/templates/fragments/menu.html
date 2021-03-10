@@ -1,0 +1,44 @@
+<div th:fragment="menu(path)" xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="/img/logo.png" id="logo" alt="Cooking"/>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item" th:class="${path == 'recipes'}? 'nav-item active' : 'nav-item'">
+                    <a class="nav-link" th:href="@{/recipes}">Recipes</a>
+                </li>
+                <li class="nav-item" th:class="${path == 'recipes/recipe-form'}? 'nav-item active' : 'nav-item'">
+                    <a class="nav-link" th:href="@{/recipes/recipe-form}">Add Recipe</a></li>
+                <li sec:authorize="isFullyAuthenticated()" class="nav-item"
+                    th:class="${path == 'user-details'}? 'nav-item active' : 'nav-item'">
+                    <a class="nav-link" th:href="@{/user-details}">View Account</a></li>
+                <li sec:authorize="hasRole('ADMIN')" class="nav-item"
+                    th:class="${path == 'users'}? 'nav-item active' : 'nav-item'">
+                    <a class="nav-link" th:href="@{/users}">View Users</a></li>
+            </ul>
+            <form class="search-form form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+
+            <form class="form-inline" method="post" th:action="@{/logout}">
+                <div>Welcome,
+                    <span sec:authorize="isAnonymous()">Guest</span>
+                    <span sec:authorize="hasRole('USER')" sec:authentication="name"></span>
+                </div>
+                <button sec:authorize="isAnonymous()" class="btn btn-outline-default my-2 my-sm-0" type="submit">Login
+                </button>
+                <button sec:authorize="isAuthenticated()" class="btn btn-outline-default my-2 my-sm-0" type="submit">
+                    Logout
+                </button>
+            </form>
+        </div>
+    </nav>
+</div>

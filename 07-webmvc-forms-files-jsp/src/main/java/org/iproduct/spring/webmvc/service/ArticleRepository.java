@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface ArticleRepository {
     Collection<Article> findAll();
+
     void create(Article article);
 }

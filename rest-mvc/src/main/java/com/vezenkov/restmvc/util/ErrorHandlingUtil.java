@@ -19,10 +19,10 @@ public class ErrorHandlingUtil {
 
         allErrors.addAll(
                 errors
-                .getFieldErrors()
-                .stream()
-                .map(err -> err.getField() + " = " + err.getRejectedValue() + ": " + err.getDefaultMessage())
-                .collect(Collectors.toList())
+                        .getFieldErrors()
+                        .stream()
+                        .map(err -> err.getField() + " = " + err.getRejectedValue() + ": " + err.getDefaultMessage())
+                        .collect(Collectors.toList())
         );
 
         return allErrors;

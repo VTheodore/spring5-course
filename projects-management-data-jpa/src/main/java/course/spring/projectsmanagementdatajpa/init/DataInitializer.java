@@ -59,20 +59,20 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        if(companyRepository.count() == 0) {
+        if (companyRepository.count() == 0) {
             companyRepository.saveAll(companies);
 //            companies.forEach(companyRepository::save);
         }
 
-        if(projectRepository.count() == 0) {
+        if (projectRepository.count() == 0) {
             projectRepository.saveAll(projects);
             projects.forEach(p -> p.getCompany().getProjects().add(p));
         }
 
-        if(userRepository.count() == 0) {
+        if (userRepository.count() == 0) {
             userRepository.saveAll(users);
             projects.get(0).getUsers().addAll(users);
-            users.forEach(u -> u.getProjects().add( projects.get(0)));
+            users.forEach(u -> u.getProjects().add(projects.get(0)));
         }
 
         companyRepository.findAll().forEach(System.out::println);

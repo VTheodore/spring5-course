@@ -16,7 +16,7 @@ public class PostRepositoryOldMock implements PostRepositoryOld {
     private final Map<String, Post> posts = new ConcurrentHashMap<>();
 
     public PostRepositoryOldMock() {
-        Arrays.stream(new Post[] {
+        Arrays.stream(new Post[]{
                 new Post("New Spring 5", "WebFlux is here ...", "Trayan Iliev"),
                 new Post("DI Basics", "There are many ways to DI in Spring ...", "Trayan Iliev"),
                 new Post("Reactive Spring", "WebFlux is based on project Ractor  ...", "Trayan Iliev")

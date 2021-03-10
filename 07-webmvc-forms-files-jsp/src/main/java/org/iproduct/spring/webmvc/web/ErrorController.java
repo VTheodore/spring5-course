@@ -15,7 +15,7 @@ public class ErrorController {
     public Map<String, String> handle(HttpServletRequest request) {
         Map<String, String> map = new HashMap<>();
         Enumeration<String> anames = request.getAttributeNames();
-        while(anames.hasMoreElements()){
+        while (anames.hasMoreElements()) {
             String aname = anames.nextElement();
             map.put(aname, request.getAttribute(aname).toString());
         }
@@ -24,4 +24,5 @@ public class ErrorController {
 //        map.put("reason",
 //                request.getAttribute("javax.servlet.error.message"));
         return map;
-    }}
+    }
+}

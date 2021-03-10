@@ -1,5 +1,5 @@
 package org.vezenkov.cookingrecipes.model;
 
-public enum  ValidityStatus {
+public enum ValidityStatus {
     ACTIVE, SUSPENDED, DEACTIVATED
 }

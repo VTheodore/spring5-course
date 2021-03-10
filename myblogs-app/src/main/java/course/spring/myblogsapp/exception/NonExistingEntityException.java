@@ -1,6 +1,6 @@
 package course.spring.myblogsapp.exception;
 
-public class NonExistingEntityException extends RuntimeException{
+public class NonExistingEntityException extends RuntimeException {
     public NonExistingEntityException() {
     }
 

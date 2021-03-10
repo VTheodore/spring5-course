@@ -1,6 +1,6 @@
 package org.vezenkov.cookingrecipes.exception;
 
-public class NonExistingEntityException extends RuntimeException{
+public class NonExistingEntityException extends RuntimeException {
     public NonExistingEntityException() {
     }
 

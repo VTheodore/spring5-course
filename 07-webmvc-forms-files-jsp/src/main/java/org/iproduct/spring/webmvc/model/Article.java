@@ -88,7 +88,7 @@ public class Article {
         if (this == o) return true;
         if (!(o instanceof Article)) return false;
         Article article = (Article) o;
-        return  Objects.equals(title, article.title);
+        return Objects.equals(title, article.title);
     }
 
     @Override

@@ -44,9 +44,9 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
-gretty{
+gretty {
     httpPort = 7000
-    
+
     contextPath = 'mvc'
     servletContainer = 'jetty9'
 }

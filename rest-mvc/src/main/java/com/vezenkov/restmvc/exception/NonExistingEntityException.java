@@ -1,6 +1,6 @@
 package com.vezenkov.restmvc.exception;
 
-public class NonExistingEntityException extends RuntimeException{
+public class NonExistingEntityException extends RuntimeException {
     public NonExistingEntityException() {
     }
 
